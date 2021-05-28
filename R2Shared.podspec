@@ -6,7 +6,7 @@ Pod::Spec.new do |s|
   s.summary      = 'R2 Shared'
   s.homepage     = 'http://readium.github.io'
   s.author       = { "Aferdita Muriqi" => "aferdita.muriqi@gmail.com" }
-  s.source       = { :git => 'https://github.com/readium/r2-shared-swift.git', :branch => 'develop' }
+  s.source       = { :git => 'https://github.com/openm1nd/r2-shared-swift.git', :branch => 'develop' }
   s.exclude_files = ["**/Info*.plist", "r2-shared-swift/Toolkit/Archive/ZIPFoundation.swift"]
   s.requires_arc = true
   s.resources    = ['r2-shared-swift/Resources/**']
