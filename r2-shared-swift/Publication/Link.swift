@@ -125,9 +125,11 @@ public struct Link: JSONEquatable, Hashable {
     public func url(relativeTo baseURL: URL?) -> URL? {
         if let url = URL(string: href), url.scheme != nil {
             return url
-        } else {
+        } else if let baseURL = baseURL {
             let safeHREF = (href.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed) ?? href).removingPrefix("/")
             return URL(string: safeHREF, relativeTo: baseURL)?.absoluteURL
+        } else {
+            return nil
         }
     }
     
@@ -290,17 +292,17 @@ extension Array where Element == Link {
         }
     }
     
-    @available(*, deprecated, message: "This API will be removed.")
+    @available(*, unavailable, message: "This API will be removed.")
     public func firstIndex<T: Equatable>(withProperty otherProperty: String, matching: T, recursively: Bool = false) -> Int? {
         return firstIndex { ($0.properties.otherProperties[otherProperty] as? T) == matching }
     }
     
-    @available(*, deprecated, renamed: "first(withHREF:)")
+    @available(*, unavailable, renamed: "first(withHREF:)")
     public func first(withHref href: String) -> Link? {
         return first(withHREF: href)
     }
     
-    @available(*, deprecated, renamed: "firstIndex(withHREF:)")
+    @available(*, unavailable, renamed: "firstIndex(withHREF:)")
     public func firstIndex(withHref href: String) -> Int? {
         return firstIndex(withHREF: href)
     }

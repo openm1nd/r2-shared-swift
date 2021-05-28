@@ -6,19 +6,43 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Fixed
+
+* [#139](https://github.com/readium/r2-shared-swift/pull/139) Compile error with Xcode 12.4
+
+
+## [2.0.0]
+
+### Deprecated
+
+* All APIs deprecated in previous versions are now unavailable.
+* `DownloadSession` is deprecated and will be removed in the next major version. Please migrate to your own download solution.
+
+
+## [2.0.0-beta.2]
+
 ### Added
 
+* `Resource` has a new API to perform progressive asynchronous reads. This is useful when streaming a resource.
+* `HTTPFetcher` is a new publication fetcher able to serve remote resources through HTTP.
+    * The actual HTTP requests are performed with an instance of `HTTPClient`.
+* `HTTPClient` is a new protocol exposing a high level API to perform HTTP requests.
+    * It supports simple fetches but also progressive downloads.
+    * `DefaultHTTPClient` is an implementation of `HTTPClient` using standard `URLSession` APIs. You can use its delegate to customize how requests are created and even recover from errors, e.g. to implement Authentication for OPDS.
+    * You can provide your own implementation of `HTTPClient` to Readium APIs if you prefer to use a third-party networking library.
 * `PublicationServiceContext` now holds a weak reference to the parent `Publication`. This can be used to access other services from a given `PublicationService` implementation.
 * The default `LocatorService` implementation can be used to get a `Locator` from a global progression in the publication.
     * `publication.locate(progression: 0.5)`
 
 ### Changed
 
-* CocoaPods is not supported anymore.
+* The `Archive` API now supports resource ownership at the entry level.
+    * The default ZIP implementation takes advantage of this by opening a new ZIP stream for each resource to be served. This improves performances and memory safety.
 
 ### Fixed
 
 * Improved performances when reading consecutive ranges of a deflated ZIP entry.
+* HREF normalization when a resource path contains special characters.
 
 
 ## [2.0.0-beta.1]
@@ -86,3 +110,5 @@ All notable changes to this project will be documented in this file.
 [2.0.0-alpha.1]: https://github.com/readium/r2-shared-swift/compare/1.4.3...2.0.0-alpha.1
 [2.0.0-alpha.2]: https://github.com/readium/r2-shared-swift/compare/2.0.0-alpha.1...2.0.0-alpha.2
 [2.0.0-beta.1]: https://github.com/readium/r2-shared-swift/compare/2.0.0-alpha.2...2.0.0-beta.1
+[2.0.0-beta.2]: https://github.com/readium/r2-shared-swift/compare/2.0.0-beta.1...2.0.0-beta.2
+[2.0.0]: https://github.com/readium/r2-shared-swift/compare/2.0.0-beta.2...2.0.0
