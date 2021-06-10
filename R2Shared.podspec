@@ -1,5 +1,4 @@
-Pod::Spec.new do |s|
-  
+Pod::Spec.new do |s|  
   s.name         = 'R2Shared'
   s.version      = '2.0.1'
   s.license      = 'BSD 3-Clause License'
@@ -19,5 +18,5 @@ Pod::Spec.new do |s|
   
   s.dependency 'Fuzi'
   s.dependency 'Minizip'
-
+  s.dependency 'SwiftSoup'
 end
